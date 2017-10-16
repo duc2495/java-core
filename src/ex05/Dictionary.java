@@ -34,14 +34,15 @@ public class Dictionary<K1, K2, Value> {
 	}
 
 	// Lưu bộ key với value tương ứng vào Dict
-	public void put(K1 k1, K2 k2, Value value) {
+	public Value put(K1 k1, K2 k2, Value value) {
 		if (dict.containsKey(k1)) {
 			HashMap<K2, Value> m = dict.get(k1);
-			m.put(k2, value);
+			return m.put(k2, value);
 		} else {
 			HashMap<K2, Value> hashMap = new HashMap<K2, Value>();
 			hashMap.put(k2, value);
 			dict.put(k1, hashMap);
+			return null;
 		}
 	}
 }

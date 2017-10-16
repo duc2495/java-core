@@ -27,6 +27,9 @@ public class Bai01 {
 	// Chuyển mảng chuỗi vào hashmap với key là chuỗi,
 	// value là số lần xuất hiện của chuỗi trong mảng
 	public static HashMap<String, Integer> addHashMap(String str) {
+		if (str == null) {
+			return null;
+		}
 		HashMap<String, Integer> hm = new HashMap<String, Integer>();
 		// Cắt chuỗi đầu vào bởi space
 		String[] strArr = str.split("\\s");
