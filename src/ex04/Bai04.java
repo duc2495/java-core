@@ -6,7 +6,7 @@ public class Bai04 {
 	private static Scanner input;
 
 	public static void main(String[] args) {
-		StringBuffer result = new StringBuffer();
+		String result = new String();
 		System.out.println("Nhập vào chuỗi ký tự [a-z]: ");
 		input = new Scanner(System.in);
 		String str = input.nextLine();
@@ -14,9 +14,19 @@ public class Bai04 {
 			System.out.println("Nhập lại: ");
 			str = input.nextLine();
 		}
+		result = findString(str);
+		if (result.length() > 0) {
+			System.out.println(result);
+		} else {
+			System.out.println("Không tìm thấy chuỗi thỏa mãn");
+		}
+	}
+
+	public static String findString(String str) {
+		StringBuffer result = new StringBuffer();
 		// Nếu chuỗi có 1 ký tự in ra ký tự đó
 		if (str.length() == 1) {
-			System.out.println(str);
+			return str;
 		} else {
 			// Nếu ký tự đầu tiên và ký tự thứ 2 khác nhau thì ta bắt đầu chuỗi
 			// cần tìm từ ký tự đầu tiên
@@ -39,13 +49,10 @@ public class Bai04 {
 				}
 			}
 			// Xét ký tự cuối cùng của chuỗi có thỏa mãn hay không
-			if (i == (str.length() - 1) && str.charAt(i - i) != str.charAt(i)) {
+			if (i == (str.length() - 1) && str.charAt(i - 1) != str.charAt(i)) {
 				result.append(str.charAt(i));
 			}
 		}
-		if (result.length() == 0)
-			System.out.println("Không tìm thấy chuỗi thỏa mãn");
-		else
-			System.out.println(result);
+		return result.toString();
 	}
 }

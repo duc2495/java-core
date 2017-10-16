@@ -15,17 +15,21 @@ public class Bai01 {
 		System.out.println("Nhập vào xâu ký tự: ");
 		input = new Scanner(System.in);
 		String str = input.nextLine();
-		// Cắt chuỗi nhập vào từ bàn phím bởi space
-		String[] strArr = str.split("\\s");
-		hm = addHashMap(strArr);
+		while (str.equals("")) {
+			System.out.println("Nhập lại: ");
+			str = input.nextLine();
+		}
+		hm = addHashMap(str);
 		showHashMap(hm);
 		hm.clear();
 	}
 
 	// Chuyển mảng chuỗi vào hashmap với key là chuỗi,
 	// value là số lần xuất hiện của chuỗi trong mảng
-	public static HashMap<String, Integer> addHashMap(String[] strArr) {
+	public static HashMap<String, Integer> addHashMap(String str) {
 		HashMap<String, Integer> hm = new HashMap<String, Integer>();
+		// Cắt chuỗi đầu vào bởi space
+		String[] strArr = str.split("\\s");
 		for (String strArr1 : strArr) {
 			// Loại bỏ các ký tự space thừa
 			if (!strArr1.isEmpty()) {

@@ -2,6 +2,8 @@ package ex03;
 
 public class Philosopher extends Thread {
 	private int id;
+
+	// Đây là 2 chopstick dùng chung mà mỗi nhà triết gia được phép sử dụng
 	private Chopstick left;
 	private Chopstick right;
 
@@ -11,6 +13,9 @@ public class Philosopher extends Thread {
 		right = r;
 	}
 
+	// Hai nhà triết gia ngồi cạnh nhau có thứ tự lấy chopstick khác nhau để
+	// tránh deadlock do chờ đợi vòng tròn khi tất cả cùng lấy chopstick bên tay
+	// phải và đợi chopstick bên trái hoặc ngược lại
 	public void getChopstick() {
 		if (id % 2 == 0) {
 			right.get();
@@ -31,6 +36,7 @@ public class Philosopher extends Thread {
 		}
 	}
 
+	// Đặt chopstick xuống sau khi ăn xong
 	public void Signal() {
 		right.put();
 		left.put();

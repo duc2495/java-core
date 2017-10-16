@@ -1,14 +1,15 @@
 package ex02;
 
-public class Horse extends Thread {
-	private Thread t;
+import java.util.concurrent.Callable;
+
+public class Horse implements Callable<Integer>{
 	private String horseName;
 	private int destination;
 	private int pace;
 	
-	Horse(String name) {
+	public Horse(String name) {
 		horseName  = name;
-		System.out.println("Con ngựa " + horseName + " đã vào đường đua");
+		System.out.println(horseName + " đã vào đường đua");
 	}
 	
 	public int getDestination() {
@@ -31,7 +32,7 @@ public class Horse extends Thread {
 		return horseName;
 	}
 
-	public void run() {
+	public Integer call() {
 		try {
 			do {
 				// Tăng giá trị chạy được với 1 giá trị random trong khoảng từ 1 đến 10
@@ -40,19 +41,12 @@ public class Horse extends Thread {
 				// Tăng số bước chạy lên 1
 				setPace(getPace() + 1);
 				// Ngủ 0.5s
-				Thread.sleep(500);
+				Thread.sleep(50);
 			} while ((getDestination() % 100 != 0));  // Nếu giá trị chạy được chia hết cho 100 thì con ngựa về đích
 		} catch (InterruptedException e) {
 			System.out.println("Thông báo: " + getHorseName()  + " bị tai nạn giữa đường. Đã bỏ cuộc!");
 		}
 		System.out.println("Thông báo: " + getHorseName()  + " đã về đích với " + getPace() + " bước chạy");
-	}
-	
-	public void start() {
-		System.out.println(getHorseName() + " bắt đầu chạy");
-		if (t == null) {
-			t = new Thread(this, getHorseName());
-			t.start();
-		}
+		return getDestination();
 	}
 }

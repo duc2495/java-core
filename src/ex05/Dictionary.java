@@ -13,13 +13,16 @@ public class Dictionary<K1, K2, Value> {
 
 	// Lấy ra giá trị ứng với bộ key (k1,k2) trong Dict
 	public Value get(K1 k1, K2 k2) {
-		HashMap<K2, Value> hashMap = dict.get(k1);
-		return hashMap.get(k2);
+		if (dict.get(k1) != null) {
+			HashMap<K2, Value> hashMap = dict.get(k1);
+			return hashMap.get(k2);
+		}
+		return null;
 	}
 
 	// Kiểm tra bộ key (k1,k2) đã có trong Dict chưa
 	// Nếu tồn tại key trả về true, ngược lại trả về false
-	boolean containKey(K1 k1, K2 k2) {
+	public boolean containsKey(K1 k1, K2 k2) {
 		boolean bool = false;
 		if (dict.get(k1) != null) {
 			HashMap<K2, Value> hashMap = dict.get(k1);
@@ -32,8 +35,13 @@ public class Dictionary<K1, K2, Value> {
 
 	// Lưu bộ key với value tương ứng vào Dict
 	public void put(K1 k1, K2 k2, Value value) {
-		HashMap<K2, Value> hashMap = new HashMap<K2, Value>();
-		hashMap.put(k2, value);
-		dict.put(k1, hashMap);
+		if (dict.containsKey(k1)) {
+			HashMap<K2, Value> m = dict.get(k1);
+			m.put(k2, value);
+		} else {
+			HashMap<K2, Value> hashMap = new HashMap<K2, Value>();
+			hashMap.put(k2, value);
+			dict.put(k1, hashMap);
+		}
 	}
 }
