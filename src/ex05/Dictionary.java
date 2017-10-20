@@ -24,9 +24,9 @@ public class Dictionary<K1, K2, Value> {
 	// Nếu tồn tại key trả về true, ngược lại trả về false
 	public boolean containsKey(K1 k1, K2 k2) {
 		boolean bool = false;
-		if (dict.get(k1) != null) {
+		if (dict.containsKey(k1)) {
 			HashMap<K2, Value> hashMap = dict.get(k1);
-			if (hashMap.get(k2) != null) {
+			if (hashMap.containsKey(k2)) {
 				bool = true;
 			}
 		}
@@ -34,6 +34,7 @@ public class Dictionary<K1, K2, Value> {
 	}
 
 	// Lưu bộ key với value tương ứng vào Dict
+	// Nếu đã tồn tại key trả về value, ngược lại trả về null
 	public Value put(K1 k1, K2 k2, Value value) {
 		if (dict.containsKey(k1)) {
 			HashMap<K2, Value> m = dict.get(k1);
